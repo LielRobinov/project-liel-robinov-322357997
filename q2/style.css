@@ -131,11 +131,8 @@ footer button {
   border-radius: 10px;
   font-size:15px;
   cursor: pointer;
-}
-
-button a{
   color: rgb(255, 226, 253);
-  text-decoration: none;
+
 }
 
 footer button:hover {

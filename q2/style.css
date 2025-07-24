@@ -142,7 +142,26 @@ footer button:hover {
   opacity: 0.8;
 }
 
+@media only screen and (max-width: 767px) {
+  .menu {
+    width: 140px; 
+  }
+
+  main {
+    margin-right: 140px; 
+    align-items: center;
+    gap: 15px;
+  }
+
+  .cardEvent {
+    width: 90%; 
+  }
+
+  footer {
+    padding-bottom: 20px;
+  }
 
 
+}
 
 

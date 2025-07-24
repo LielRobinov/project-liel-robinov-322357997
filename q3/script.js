@@ -15,7 +15,10 @@ function showMessage(message, type) {
         }, 5000);
 }
 
-document.getElementById('form').addEventListener('submit' , function(e){
+window.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('form');
+    if (form){
+        form.addEventListener('submit' , function(e){
     e.preventDefault();
 
     const errors = [];
@@ -25,6 +28,8 @@ document.getElementById('form').addEventListener('submit' , function(e){
     const email = document.getElementById('email').value.trim();
     const multi = document.querySelector('input[name="multi"]:checked');
     const security = document.getElementById('securityLevel').value;
+    const description = document.getElementById('description').value;
+
 
     const messages = document.querySelector('#messages');
     messages.innerHTML = '';
@@ -56,12 +61,6 @@ document.getElementById('form').addEventListener('submit' , function(e){
         }
     }
 
-    if (targetTime) {  
-        if (arrivalDate < targetTimeDate) {
-            errors.push("זמן נחיתה בפועל לא יכול להיות לפני זמן היעד");
-        }
-    }
-
     if(!multi){
         errors.push("יש לבחור אם יותר מאדם חצה");
     }
@@ -76,12 +75,32 @@ document.getElementById('form').addEventListener('submit' , function(e){
 
     if (errors.length > 0){
     showMessage(errors.join(" | "), 'error');
+    return;
     } 
-    else {
+    let newReport={
+        id: Date.now().toString(), // מזהה ייחודי לפי זמן
+        channel: channel,
+        targetTime: targetTime,
+        arrivalTime: arrivalTime,
+        email: email,
+        multi: multi.value,
+        securityLevel: security,
+        description: description
+    }
+
+    saveItem(newReport);
+    renderItems();
     showMessage("הדיווח התקבל בהצלחה! צוות המרחב הזמני ייצור קשר בקרוב.", 'success');
     this.reset();
-    }
+
+    setTimeout(function(){
+        window.location.href = 'view.html';
+        }, 1500);
+
+    })
+}
 })
+
 
 const key = 'timeFaults';
 function loadItems() {
@@ -94,7 +113,7 @@ function loadItems() {
 function saveItem (item){
     const items = loadItems();
     items.push(item);
-   localStorage.setItem(key, JSON.stringify(items));
+    localStorage.setItem(key, JSON.stringify(items));
 }
 
 function deleteItem(id){
@@ -122,9 +141,8 @@ function updateItem (id , changes){
         }
     }
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    localStorage.setItem(key, JSON.stringify(items));
     renderItems(); 
-
 }
 function renderItems(){
     const list = document.getElementById("faultList");
@@ -145,46 +163,47 @@ function renderItems(){
 
     let count = 0;
     for(let i = 0; i < items.length; i++){
+        let item = items[i];
 
-    }
-}
-
-
-function renderItems() {
-
-    const list = document.getElementById("faultList");
-    list.innerHTML = '';
-
-    const items = loadItems();
-    const filterValue = document.getElementById("filter").value;
-
-    for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-
-        // סינון לפי רמת אבטחה אם נבחר משהו
-        if (filterValue !== 'all' && item.security !== filterValue) {
+        if (filterValue !== "all" && item.description !== filterValue) {
             continue;
         }
 
-        var div = document.createElement("div");
-        div.className = "item";
+        let div = document.createElement("div");
+        div.className = "report";
         div.style.border = "1px solid #ccc";
-        div.style.margin = "10px";
         div.style.padding = "10px";
-        div.style.borderRadius = "8px";
-        div.style.backgroundColor = item.security === "גבוהה" ? "#ffebee" : (item.security === "בינונית" ? "#fffde7" : "#e8f5e9");
+        div.style.marginBottom = "10px";
+        div.style.borderRadius = "5px";
 
-        div.innerHTML =
-            "<strong>מספר תעלה:</strong> " + item.channel + "<br>" +
-            "<strong>זמן יעד:</strong> " + item.targetTime + "<br>" +
-            "<strong>זמן נחיתה בפועל:</strong> " + item.arrivalTime + "<br>" +
-            "<strong>אימייל:</strong> " + item.email + "<br>" +
-            "<strong>רבים חצו?:</strong> " + item.multi + "<br>" +
-            "<strong>רמת אבטחה:</strong> " + item.security + "<br>" +
-            "<strong>סטטוס:</strong> " + (item.status || "פתוחה") + "<br><br>" +
-            "<button onclick=\"deleteItem('" + item.id + "')\">מחיקה</button> " +
-            "<button onclick=\"updateItem('" + item.id + "')\">החלף סטטוס</button>";
+        let data = "<p><strong>מספר תעלה:</strong> " + item.channel + "</p>" +
+            "<p><strong>סוג תקלה:</strong> " + item.description + "</p>" +
+            "<p><strong>זמן יעד:</strong> " + item.targetTime + "</p>" +
+            "<p><strong>זמן נחיתה בפועל:</strong> " + item.arrivalTime + "</p>" +
+            "<p><strong>אימייל:</strong> " + item.email + "</p>" +
+            "<p><strong>האם יותר מאדם חצה:</strong> " + item.multi + "</p>" +
+            "<p><strong>רמת אבטחה:</strong> " + item.securityLevel + "</p>";
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "מחיקה";
+        deleteBtn.style.marginRight = "10px";
+
+        deleteBtn.addEventListener("click", function(){
+            deleteItem(item.id);
+        })
+
+        div.innerHTML = data;
+        div.appendChild(deleteBtn);
 
         list.appendChild(div);
+        count++;
+    }
+
+    if (count === 0){
+        list.innerHTML = "<p>לא נמצאו דיווחים להצגה.</p>"
     }
 }
+
+window.addEventListener('DOMContentLoaded', renderItems);
+
+

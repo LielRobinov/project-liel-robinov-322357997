@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>לוח תקלות זמן</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>רשימת דיווחים</h1>
+
+    <div class="container">
+        <label for="filter">סינון לפי סוג תקלה:</label>
+        <select name="filter" id="filter">
+            <option value="all">הכל</option>
+            <option value="hole">חור בזמן</option>
+            <option value="tremor">רעד</option>
+            <option value="Dinosaur">מפגש עם דינוזאור</option>
+        </select>
+    </div>
+
+    <div id="faultList"></div>
+
+    <script src="/q3/script.js"></script>
+</body>
+</html>

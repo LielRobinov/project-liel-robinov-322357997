@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דיווח תקלה במעבר זמן</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+      <main>
+        <h1>דיווח תקלה במעבר זמן</h1>
+        <form id="form">
+            <label for="channel">מספר תעלה: (חובה)</label> 
+            <input type="number" id="channel" name="channel" required  min="1" max="999"> 
+
+            <label for="time">זמן יעד:</label> 
+            <input type="datetime-local" id="time" name="time"> 
+
+            <label for="arrivalTime">זמן נחיתה בפועל:</label> 
+            <input type="datetime-local" id="arrivalTime" name="arrivalTime"> 
+
+            <label for="description">תיאור התקלה:</label>
+            <select id="description" name="description">
+            <option value="all">הכל</option>
+            <option value="hole">חור בזמן</option>
+            <option value="tremor">רעד</option>
+            <option value="Dinosaur">מפגש עם דינוזאור</option>
+            </select>
+
+            <label>האם יותר מאדם חצה?</label> 
+            <div class="radioType">
+            <input type="radio" name="multi" value="yes" checked> כן
+            <input type="radio" name="multi" value="no"> לא
+            </div>
+
+            <label for="securityLevel">שדה אבטחה נוכחי:</label> 
+            <select id="securityLevel" name="securityLevel">
+                <option value="" disabled selected>בחר</option>
+                <option value="low">נמוכה</option>
+                <option value="medium">בינונית</option>
+                <option value="high">גבוהה</option>  
+            </select> 
+
+            <label for="email">כתובת מייל לדיווח חוזר:</label> 
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required> 
+
+            <p class="messages hidden" id="messages"></p>
+
+            <button type="submit">שלח דיווח</button>
+        </form>
+      </main>
+    </div>
+
+
+<script src="/q3/script.js"></script>
+</body>
+</html>

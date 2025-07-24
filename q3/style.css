@@ -1,0 +1,97 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: rgb(247, 247, 247);
+    color: rgb(64, 67, 103);
+}
+
+.container{
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+}
+
+main{
+  padding: 20px;
+  width: 100%;
+  max-width: 550px;
+  background: rgb(192, 204, 219);
+  border-radius: 10px;
+}
+h1{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;    
+    gap:5px;
+}
+
+input , select , textarea{
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    opacity: 0.6;
+}
+
+select option{
+    color: rgb(64, 67, 103);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.radioType{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+button{
+    padding: 10px;
+    font-size: 14px;
+    background-color:rgb(247, 247, 247) ;
+    opacity: 0.6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80px;
+    margin: 10px auto 0;
+    color: rgb(64, 67, 103);
+    font-weight: bold;
+}
+
+button:hover{
+opacity: 0.9;
+background-color: rgb(166, 180, 196);
+}
+
+.messages{
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    max-width: 100%;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+    color: black;
+}
+
+.message-error{
+    color: rgb(165, 55, 55);
+}
+
+.message-success{
+    color: rgb(53, 158, 93);
+}
+
+.hidden{
+    display: none;
+}

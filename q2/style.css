@@ -23,7 +23,6 @@ header{
     left: 0;
 }
 
-
 .menu{
     position:fixed;
     top:100px;
@@ -52,7 +51,6 @@ header{
 
 main{
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;

@@ -34,7 +34,6 @@ h1{
 }
 
 .mainTitle{
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 

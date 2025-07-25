@@ -105,6 +105,10 @@ background-color: rgb(166, 180, 196);
     margin-top: 20px;
 }
 
+.nofoundMessage{
+    text-align: center;
+}
+
 .report{
     background-color: rgb(192, 204, 219);
     border: 1px solid rgb(64, 67, 103);

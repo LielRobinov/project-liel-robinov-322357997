@@ -231,7 +231,7 @@ function renderItems(){
     }
 
     if (count === 0){
-        list.innerHTML = "<p>לא נמצאו דיווחים להצגה.</p>"
+        list.innerHTML = "<p class=nofoundMessage>לא נמצאו דיווחים להצגה.</p>"
     }
 }
 
